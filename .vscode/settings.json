@@ -11,14 +11,17 @@
 
     // 执行额外的 Action
     // 使用 Format Code Action 进行格式化
-    "source.formatDocument": true,
+    // "source.formatDocument": true,
     // 使用 Format Code Action 对修改部分进行格式化
-    "source.formatModified": true
+    // "source.formatModified": true
   },
 
   //   编辑器：保存即格式化
-  //   "editor.formatOnSave": true,
-  
+  "editor.formatOnSave": false,
+
   // 编辑器：设置默认格式化工具 有了这个就不用每个类型的文件都设置一个格式化工具，大部分用prettier，只有特殊情况需要单独设置
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
