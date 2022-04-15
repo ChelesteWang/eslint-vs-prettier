@@ -135,7 +135,7 @@ eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettie
 
 开发的时候使用 Prettier 插件提供的规则进行检查 , 可以配套搭配 Prettier 插件直接格式化 , 如此在我们保存文件时，ESLint 会使用 Prettier 插件提供的规则自动进行格式化（执行 Fix）。
 
-### 2. 通过 Prettier-ESLint q 解决
+### 2. 通过 Prettier-ESLint 解决
 
 Prettier-ESLint 插件是仅用于格式化代码的 Formatter ，默认通过 Prettier 先对代码进行格式化，再将结果传递给 eslint --fix.
 
