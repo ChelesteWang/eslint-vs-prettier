@@ -1,6 +1,6 @@
 module.exports = {
   printWidth: 200, // 设置prettier单行输出（不折行）的（最大）长度
-  tabWidth: 20, // 设置工具每一个水平缩进的空格数
+  tabWidth: 2, // 设置工具每一个水平缩进的空格数
   useTabs: false, // 使用tab（制表位）缩进而非空格
   semi: false, // 在语句末尾添加分号
   singleQuote: true, // 使用单引号而非双引号
