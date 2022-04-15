@@ -1,0 +1,13 @@
+{
+  "name": "eslint-vs-prettier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ChelesteWang/eslint-vs-prettier.git",
+  "author": "ChelesteWang <1581446178@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
