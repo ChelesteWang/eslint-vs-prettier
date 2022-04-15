@@ -6,7 +6,7 @@
 
 .vscode/settings.json
 
-```json
+```js
 {
   // 文件：文件自动保存，只要暂停输入
   "files.autoSave": "afterDelay",
