@@ -2,6 +2,11 @@
 
 ## eslint 与 prettier 共用会产生冲突
 
+打开 src/index.js 的时候会发现这个问题
+
+<img width="343" alt="image" src="https://user-images.githubusercontent.com/40495740/163502116-69707610-8a85-431f-9439-c249173c032b.png">
+
+
 ## VSCode settings 配置
 
 .vscode/settings.json
