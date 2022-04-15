@@ -250,19 +250,9 @@ function getArrowParens(eslintValue, fallbacks) {
 }
 
 function extractRuleValue(objPath, name, value) {
-  // XXX: Ignore code coverage for the following else case
-  // There are currently no eslint rules which we can infer prettier
-  // options from, that have an object option which we don't know how
-  // to infer from.
-
-  // istanbul ignore else
   if (objPath) {
     return delve(value, objPath, RULE_NOT_CONFIGURED)
   }
-
-  // istanbul ignore next
-
-  // istanbul ignore next
   return undefined
 }
 
@@ -271,16 +261,9 @@ function getRuleValue(rules, name, objPath) {
 
   if (Array.isArray(ruleConfig)) {
     const [ruleSetting, value] = ruleConfig
-
-    // If `ruleSetting` is set to disable the ESLint rule don't use `value` as
-    // it might be a value provided by an overriden config package e.g. airbnb
-    // overriden by config-prettier. The airbnb values are provided even though
-    // config-prettier disables the rule. Instead use fallback or prettier
-    // default.
     if (ruleSetting === 0 || ruleSetting === 'off') {
       return RULE_DISABLED
     }
-
     if (typeof value === 'object') {
       return extractRuleValue(objPath, name, value)
     } else {

@@ -65,6 +65,8 @@ prettier > default > eslint
 
 意味着通常情况下 Prettier 最后执行完毕。代码样式就由 Prettier 决定了。如果你既用了 ESLint 又用了 Prettier，在 ESLint 格式化好后，再 Prettier 格式化不就闪烁了吗？
 
+过程中也看到一个 issue ：[相关链接](https://github.com/microsoft/vscode/issues/87096)
+
 ## ESLint 与 prettier 相比有何不同
 
 Linter 有两类规则：
@@ -192,7 +194,7 @@ function format(options) {
 }
 ```
 
-
+合并出一个 Formatter Config ，如果 Prettier 有配置相关的规则，则优先使用 Prettier 否则从 ESlint 中的规则进行补齐，详细原理可以看 prettier-eslint 的 utils.js 进行学习
 
 ## 最佳实践
 
