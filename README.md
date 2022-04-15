@@ -57,6 +57,8 @@ formatOnSave 先寻找工作区下 .vscode/settings.json 下是否有配置然�
 
 **运行时机**
 
+TODO
+
 由 Prettier 进行所有的 format ,然后再针对不同类型的文件使用各种的 Soruce action ,
 
 ## ESLint 与 prettier 相比有何不同
@@ -74,27 +76,6 @@ Prettier 对这些规则没有任何帮助。它们也是 linter 提供的最重
 换句话说，使用 Prettier 进行格式化，使用 linter 来捕捉错误！
 
 ## 如何解决冲突问题
-
-### 0. 关闭 formatOnSave 格式化以 ESlint 规则为准
-
-[VSCode ESLint 的插件主页](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)有这样一段话
-
-```
- Please also note that if you use ESLint as your default formatter you should turn off editor.formatOnSave when you have turned on editor.codeActionsOnSave. Otherwise you file gets fixed twice which in unnecessary.
-```
-
-请注意，如果你使用 ESLint 作为你的默认格式，当你打开 editor.codeActionsOnSave 时，你应该关闭 editor.formatOnSave。否则，你的文件会被修复两次，这是不必要的。
-
-```js
-{
-  "editor.formatOnSave": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-  }
-}
-```
-
-当然我们到时候希望样式格式化以 prettier 规则为准，因此这个方案不太能满足需求
 
 ### 1. 通过配置 eslint-config-prettier 与 eslint-plugin-prettier 解决
 
@@ -129,6 +110,29 @@ eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettie
 };
 ```
 
+[VSCode ESLint 的插件主页](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)有这样一段话
+
+```
+ Please also note that if you use ESLint as your default formatter you should turn off editor.formatOnSave when you have turned on editor.codeActionsOnSave. Otherwise you file gets fixed twice which in unnecessary.
+```
+
+请注意，如果你使用 ESLint 作为你的默认格式，当你打开 editor.codeActionsOnSave 时，你应该关闭 editor.formatOnSave。否则，你的文件会被修复两次，这是不必要的。
+
+修改 .vscode/settings.json 中的配置
+
+```js
+{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+  }
+}
+```
+
+开发的时候使用 Prettier 插件提供的规则进行检查 , 可以配套搭配 Prettier 插件直接格式化 , 如此在我们保存文件时，ESLint 会使用 Prettier 插件提供的规则自动进行格式化（执行 Fix）。
+
 ### 2. 通过 prettier-eslint 解决
 
 ## 最佳实践
+
+修改 prettier 配置
