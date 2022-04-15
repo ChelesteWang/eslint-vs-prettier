@@ -1,14 +1,14 @@
-# eslint-vs-prettier
+# ESLint 与 Prettier 结合最佳实践
 
-## eslint 与 prettier 共用会产生冲突
+## ESLint 与 Prettier 共用会产生冲突
 
 打开 src/index.js 的时候连续自动保存时会发现一个问题。
 
 <img width="343" alt="image" src="https://user-images.githubusercontent.com/40495740/163502116-69707610-8a85-431f-9439-c249173c032b.png">
 
-原因是 eslint 格式好的文件由于 prettier 配置与 eslint 冲突被再次格式化，图中问题是 eslint 要求行尾保留分号，而 prettier 则不允许行尾保留分号。
+原因是 ESLint 格式好的文件由于 Pretter 配置与 ESLint 冲突被再次格式化，图中问题是 ESLint 要求行尾保留分号，而 Prettier 则不允许行尾保留分号。
 
-## VSCode settings 配置
+## VS Code settings 配置
 
 .vscode/settings.json
 
@@ -49,9 +49,9 @@ Format：格式化，简单来说就是变量后面是否需要空格，语句�
 
 Source Action：源代码操作，源代码操作还可以使代码被修改之后会切实影响代码运行结果比如 `organizeImports` ，`fixAll.eslint` . 当然格式化在某种意义上也是源动作，可以通过 Format Code Action 格式化代码
 
-codeActionsOnSave 是 VSCode 保存后的执行的源代码，按照上面的例子保存后将会执行一次 eslint 校验，随后调整 import 顺序，再执行 Format Code Action 格式化代码
+codeActionsOnSave 是 VS Code 保存后的执行的源代码，按照上面的例子保存后将会执行一次 ESLint 校验，随后调整 import 顺序，再执行 Format Code Action 格式化代码
 
-而 formatOnSave 是 VSCode 默认提供的一个属性，属性可选值为 Boolean 类型，使用 editor.defaultFormatter 设置的格式化工具进行格式化（针对语言配置的优先于当前 settings.json 中全局配置的）
+而 formatOnSave 是 VS Code 默认提供的一个属性，属性可选值为 Boolean 类型，使用 editor.defaultFormatter 设置的格式化工具进行格式化（针对语言配置的优先于当前 settings.json 中全局配置的）
 
 formatOnSave 先寻找工作区下 .vscode/settings.json 下是否有配置然后检查 user 目录全局中是否配置，如果都没有会按照编辑器设置中的 Editor: Format On Save 的结果决定是否保存后更改
 
@@ -61,13 +61,13 @@ formatOnSave 先寻找工作区下 .vscode/settings.json 下是否有配置然�
 
 常见格式程序执行时长（自测得出）：
 
-prettier > default > eslint
+Prettier > default > ESLint
 
 意味着通常情况下 Prettier 最后执行完毕。代码样式就由 Prettier 决定了。如果你既用了 ESLint 又用了 Prettier，在 ESLint 格式化好后，再 Prettier 格式化不就闪烁了吗？
 
 过程中也看到一个 issue ：[相关链接](https://github.com/microsoft/vscode/issues/87096)
 
-## ESLint 与 prettier 相比有何不同
+## ESLint 与 Prettier 相比有何不同
 
 Linter 有两类规则：
 
@@ -87,10 +87,10 @@ Prettier 对这些规则没有任何帮助。它们也是 linter 提供的最重
 
 在 eslint 的生态中 eslint-config-x 用于配置规则 rule ，而 eslint-plugin-x 用于配置规则的插件。
 
-- eslint-config-prettier：解决 ESLint 中的样式规范和 prettier 中样式规范的冲突，关闭 ESLint 中的涉及到 prettier 样式规范，使 ESLint 中的样式规范自动失效。
-- eslint-plugin-prettier：通过调用 prettier 的规则对代码风格进行检查。 并抛出错误，以便 ESLint 可以捕获它们。
+- eslint-config-prettier：解决 ESLint 中的样式规范和 Pretter 中样式规范的冲突，关闭 ESLint 中的涉及到 Pretter 样式规范，使 ESLint 中的样式规范自动失效。
+- eslint-plugin-prettier：通过调用 Pretter 的规则对代码风格进行检查。 并抛出错误，以便 ESLint 可以捕获它们。
 
-eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettier 的能力
+eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 Pretter 的能力
 
 还可以简化配置
 
@@ -116,7 +116,7 @@ eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettie
 };
 ```
 
-[VSCode ESLint 的插件主页](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)有这样一段话
+[VS Code ESLint 的插件主页](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)有这样一段话
 
 ```
  Please also note that if you use ESLint as your default formatter you should turn off editor.formatOnSave when you have turned on editor.codeActionsOnSave. Otherwise you file gets fixed twice which in unnecessary.
@@ -194,7 +194,7 @@ function format(options) {
 }
 ```
 
-合并出一个 Formatter Config ，如果 Prettier 有配置相关的规则，则优先使用 Prettier 否则从 ESlint 中的规则进行补齐，详细原理可以看 prettier-eslint 的 utils.js 进行学习
+合并出一个 Formatter Config ，如果 Prettier 有配置相关的规则，则优先使用 Prettier 否则从 ESLint 中的规则进行补齐，详细原理可以看 prettier-eslint 的 utils.js 进行学习
 
 ## 最佳实践
 
