@@ -57,9 +57,13 @@ formatOnSave 先寻找工作区下 .vscode/settings.json 下是否有配置然�
 
 **运行时机**
 
-TODO
+由 Prettier 进行所有的 format , 同时再针对不同类型的文件使用各种的 Soruce action ，由于不同格式化程序执行时长不一样，导致文件格式好后和预期不符。
 
-由 Prettier 进行所有的 format ,然后再针对不同类型的文件使用各种的 Soruce action ,
+常见格式程序执行时长（自测得出）：
+
+prettier > default > eslint
+
+意味着通常情况下 Prettier 最后执行完毕。代码样式就由 Prettier 决定了。如果你既用了 ESLint 又用了 Prettier，在 ESLint 格式化好后，再 Prettier 格式化不就闪烁了吗？
 
 ## ESLint 与 prettier 相比有何不同
 
@@ -131,7 +135,64 @@ eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettie
 
 开发的时候使用 Prettier 插件提供的规则进行检查 , 可以配套搭配 Prettier 插件直接格式化 , 如此在我们保存文件时，ESLint 会使用 Prettier 插件提供的规则自动进行格式化（执行 Fix）。
 
-### 2. 通过 prettier-eslint 解决
+### 2. 通过 Prettier-ESLint q 解决
+
+Prettier-ESLint 插件是仅用于格式化代码的 Formatter ，默认通过 Prettier 先对代码进行格式化，再将结果传递给 eslint --fix.
+
+```js
+function format(options) {
+  const { logLevel = getDefaultLogLevel() } = options
+
+  // 读取配置 , 如果没有配置，则使用默认配置
+  const {
+    filePath,
+    text = getTextFromFilePath(filePath),
+    eslintPath = getModulePath(filePath, 'eslint'),
+    prettierPath = getModulePath(filePath, 'prettier'),
+    prettierLast,
+    fallbackPrettierOptions
+  } = options
+
+  // 合并默认配置和用户配置
+  const eslintConfig = merge({}, options.eslintConfig, getESLintConfig(filePath, eslintPath))
+  if (typeof eslintConfig.globals === 'object') {
+    eslintConfig.globals = Object.entries(eslintConfig.globals).map(([key, value]) => `${key}:${value}`)
+  }
+  const prettierOptions = merge({}, filePath && { filepath: filePath }, getPrettierConfig(filePath, prettierPath), options.prettierOptions)
+  const formattingOptions = getOptionsForFormatting(eslintConfig, prettierOptions, fallbackPrettierOptions, eslintPath)
+  const eslintExtensions = eslintConfig.extensions || ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.vue']
+  const fileExtension = path.extname(filePath || '')
+  const onlyPrettier = filePath ? !eslintExtensions.includes(fileExtension) : false
+
+  // 创建一个 Prettier 格式化执行器
+  const prettify = createPrettify(formattingOptions.prettier, prettierPath)
+
+  if (onlyPrettier) {
+    return prettify(text)
+  }
+
+  // 对不同类型进行 AST 转换
+  if (['.ts', '.tsx'].includes(fileExtension)) {
+    formattingOptions.eslint.parser = formattingOptions.eslint.parser || require.resolve('@typescript-eslint/parser')
+  }
+
+  if (['.vue'].includes(fileExtension)) {
+    formattingOptions.eslint.parser = formattingOptions.eslint.parser || require.resolve('vue-eslint-parser')
+  }
+
+  // 创建一个 eslint --fix 执行器
+  const eslintFix = createEslintFix(formattingOptions.eslint, eslintPath)
+
+  if (prettierLast) {
+    return prettify(eslintFix(text, filePath))
+  }
+
+  // 使用 eslint --fix 格式化 Prettier 格式化后的代码
+  return eslintFix(prettify(text), filePath)
+}
+```
+
+
 
 ## 最佳实践
 
@@ -207,5 +268,3 @@ module.exports = {
 }
 
 ```
-
-
