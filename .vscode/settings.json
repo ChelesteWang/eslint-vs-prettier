@@ -7,7 +7,7 @@
     // 保存的时候执行一次eslint校验
     "source.fixAll.eslint": true,
     // 保存的时候调整import顺序，按引入包字母顺序
-    "source.organizeImports": true,
+    "source.organizeImports": true
 
     // 执行额外的 Action
     // 使用 Format Code Action 进行格式化
