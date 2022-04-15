@@ -51,10 +51,12 @@ codeActionsOnSave 是 VSCode 保存后的动作，按照上面的例子保存后
 
 由 Prettier 进行所有的 format ,然后再针对不同类型的文件使用各种的 Soruce action ,
 
-eslint 与 prettier 不同分析
+## eslint 与 prettier 不同分析
 
 - eslint-config-prettier：解决 ESLint 中的样式规范和 prettier 中样式规范的冲突，以 prettier 的样式规范为准，使 ESLint 中的样式规范自动失效。对应 eslintrc 配置 extends-"prettier"
 - eslint-plugin-prettier：将 prettier 样式规范作为 ESLint 规范来使用，同样将格式问题以 error 的形式抛出，即 rule-"prettier/prettier"，可在 rules-"prettier/prettier"中进行自定义配置。对应 eslintrc 配置 plugin-"prettier"
+
+
 
 ## ESLint 与 prettier 相比有何不同
 
