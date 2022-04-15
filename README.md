@@ -135,4 +135,77 @@ eslint-plugin-prettier 通过实现 ESLint 插件，为 ESLint 扩展了 prettie
 
 ## 最佳实践
 
-修改 prettier 配置
+prettier.config.js 配置你的风格化规则
+
+```js
+module.exports = {
+  printWidth: 200, // 设置prettier单行输出（不折行）的（最大）长度
+  tabWidth: 2, // 设置工具每一个水平缩进的空格数
+  useTabs: false, // 使用tab（制表位）缩进而非空格
+  semi: false, // 在语句末尾添加分号
+  singleQuote: true, // 使用单引号而非双引号
+  jsxSingleQuote: false, // jsx 不使用单引号，而使用双引号
+  trailingComma: 'none', // 在任何可能的多行中输入尾逗号
+  bracketSpacing: true, // 在对象字面量声明所使用的的花括号后（{）和前（}）输出空格
+  jsxBracketSameLine: true, // 在多行JSX元素最后一行的末尾添加 > 而使 > 单独一行（不适用于自闭和元素）
+  arrowParens: 'always', // 为单行箭头函数的参数添加圆括号，参数个数为1时可以省略圆括号
+  rangeStart: 0, // 只格式化某个文件的一部分
+  rangeEnd: Infinity, // 只格式化某个文件的一部分
+  filepath: 'none', // 指定文件的输入路径，这将被用于解析器参照
+  requirePragma: false, // (v1.7.0+) Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码，这些注释称为“require pragma”(必须杂注)
+  insertPragma: false, //  (v1.8.0+) Prettier可以在文件的顶部插入一个 @format的特殊注释，以表明改文件已经被Prettier格式化过了。
+  proseWrap: 'preserve' // (v1.8.2+)
+}
+```
+
+.eslintrc.js 配置 lint 检查规则, 搭配 eslint-config-prettier 与 eslint-plugin-prettier ，移除 eslint 原有配置中风格化规则，使用 Prettier 插件提供的规则
+
+```js
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: ['airbnb-base', 'prettier'], // 继承 eslint-config-prettier 的 rules 关闭 ESLint 中的涉及到 prettier 样式的规则
+  plugins: ['prettier'], // 注册 eslint-plugin-prettier
+  rules: {
+    'prettier/prettier': 'error', // 打开该插件提供的规则，并且是作为eslint的一条规则运行
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off'
+  },
+  // extends: ['airbnb-base', 'plugin:prettier/recommended'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  }
+}
+```
+
+.vscode/settings.json 配置自动保存后的行为
+
+```js
+{
+  // 文件：文件自动保存，只要暂停输入
+  "files.autoSave": "afterDelay",
+
+  // 编辑器：保存时候的动作
+  "editor.codeActionsOnSave": {
+    // 保存的时候执行一次eslint校验
+    "source.fixAll.eslint": true,
+  },
+
+  //   编辑器：保存即格式化
+  "editor.formatOnSave": false,
+
+  // 编辑器：设置默认格式化工具 有了这个就不用每个类型的文件都设置一个格式化工具，大部分用prettier，只有特殊情况需要单独设置
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 针对特定语言规定格式化工具
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+
+```
+
+
