@@ -279,7 +279,12 @@ prettier 项目开始于 2017 年
 
 eslint autofix feature 提交于 2015 年
 
+[https://github.com/eslint/eslint/pull/3635](https://github.com/eslint/eslint/pull/3635)
+
 <img width="946" alt="image" src="https://user-images.githubusercontent.com/40495740/166854565-6d2be12c-aea5-45b0-9ee4-6fdfc8f89cbc.png">
+
+<img width="1057" alt="image" src="https://user-images.githubusercontent.com/40495740/166854812-35b7dff4-4207-4c3a-abaf-e07d4b0bfd9f.png">
+
 
 ## 为何使用 prettier 的原因
 
@@ -296,3 +301,5 @@ Formatters such as Prettier and Black are used to force a consistent style for t
 [https://prettier.io/docs/en/why-prettier.html](https://prettier.io/docs/en/why-prettier.html)
 
 [https://www.eficode.com/blog/how-to-write-better-code-with-tools](https://www.eficode.com/blog/how-to-write-better-code-with-tools)
+
+[https://github.com/eslint/eslint/pulls?page=4&q=Update%3A+Implement+auto+fix](https://github.com/eslint/eslint/pulls?page=4&q=Update%3A+Implement+auto+fix)
