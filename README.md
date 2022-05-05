@@ -270,3 +270,29 @@ module.exports = {
 }
 
 ```
+
+## 历史溯源
+
+prettier 项目开始于 2017 年
+
+<img width="1172" alt="image" src="https://user-images.githubusercontent.com/40495740/166854509-856e8c7b-b5ed-496c-9095-c1bb294c66d3.png">
+
+eslint autofix feature 提交于 2015 年
+
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/40495740/166854565-6d2be12c-aea5-45b0-9ee4-6fdfc8f89cbc.png">
+
+## 为何使用 prettier 的原因
+
+```
+Formatters such as Prettier and Black are used to force a consistent style for the project by printing it out according to their set of rules. Formatters are used in addition to the linters: Linters are used for code quality, formatters for formatting rules. Besides JavaScript and TypeScript, Prettier can also format CSS, Less, SCSS, HTML, JSON, Markdown and YAML to name a few. Because formatting of the code doesn’t really affect how the code works, it’s not so important what the set of rules are, but that there are common rules of some kind being used. That’s why the best formatters are opinionated and need no configuration at all. While most formatting rules are up for debate, the defaults of them are optimized for readability and there’s rarely a logical reason to differ from that. For the best efficiency, it’s probably best to have a formatting step in pre-commit hook so that it’s impossible to commit badly formatted code, thus the developer can write the code in any format that feels the most comfortable. In addition, formatters can be integrated with the editor to format code on file saving. The benefits are enormous: Huge time savings, when it’s no longer needed to make decisions about style and no longer required to manually type whitespaces or other optional characters. Formatting huge codebases can be done in a matter of seconds. Using formatters also makes it super easy to start contributing to a codebase when it’s no longer needed to learn the formatting conventions of the project.
+```
+
+## 参考文献
+
+[https://github.com/prettier/prettier/issues/8507](https://github.com/prettier/prettier/issues/8507)
+
+[https://github.com/prettier/prettier-eslint](https://github.com/prettier/prettier-eslint)
+
+[https://prettier.io/docs/en/why-prettier.html](https://prettier.io/docs/en/why-prettier.html)
+
+[https://www.eficode.com/blog/how-to-write-better-code-with-tools](https://www.eficode.com/blog/how-to-write-better-code-with-tools)
