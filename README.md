@@ -303,3 +303,5 @@ Formatters such as Prettier and Black are used to force a consistent style for t
 [https://www.eficode.com/blog/how-to-write-better-code-with-tools](https://www.eficode.com/blog/how-to-write-better-code-with-tools)
 
 [https://github.com/eslint/eslint/pulls?page=4&q=Update%3A+Implement+auto+fix](https://github.com/eslint/eslint/pulls?page=4&q=Update%3A+Implement+auto+fix)
+
+[https://github.com/prettier/prettier-eslint/issues/101](https://github.com/prettier/prettier-eslint/issues/101)
